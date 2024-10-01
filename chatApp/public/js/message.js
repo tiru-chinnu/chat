@@ -8,7 +8,7 @@ function init() {
     }
 }
 init()
-const socket = new WebSocket(`ws:/${window.location.host}`),
+const socket = new WebSocket(`wss:/${window.location.host}`),
     input = document.querySelector('input[type="text"]')
 socket.onopen = (e) => {
     socket.addEventListener('message', (e) => {
