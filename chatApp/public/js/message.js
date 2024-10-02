@@ -8,8 +8,15 @@ function init() {
     }
 }
 init()
-const socket = new WebSocket(`wss:/${window.location.host}`),
-    input = document.querySelector('input[type="text"]')
+const input = document.querySelector('input[type="text"]')
+let socket
+function connect(){
+   socket = new WebSocket(`wss:/${window.location.host}`)
+   socket.onclose=()=>{
+    console.log('reconnection is invoked...')
+    setTimeout(connect,5000)
+   }
+}
 socket.onopen = (e) => {
     socket.addEventListener('message', (e) => {
         const { username, message } = JSON.parse(e.data)
